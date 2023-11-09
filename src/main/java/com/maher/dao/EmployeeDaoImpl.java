@@ -27,7 +27,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 employees.add(employee);
             }
         } catch (SQLException e) {
-            throw  new RuntimeException(e);
+            throw new RuntimeException(e);
         }
         return employees;
     }
@@ -36,7 +36,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public Employee getById(int id) {
         String query = "SELECT * FROM employee where id= ?";
         try (Connection connection = DBConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return new Employee(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getDouble("salary"),
@@ -46,7 +46,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         } catch (SQLException e) {
             throw new RuntimeException();
         }
-        return  null;
+        return null;
     }
 
     @Override
@@ -144,4 +144,22 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }
     }
 
+    @Override
+    public void deleteAllData(String tableName) {
+        String query = "DELETE FROM "+ tableName;
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+//            preparedStatement.setString(1, tableName);
+            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate() > 0) {
+                System.out.printf("Finish Delete %d", preparedStatement.executeUpdate());
+            } else {
+                System.out.println("Not Records Changed");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

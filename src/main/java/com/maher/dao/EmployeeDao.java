@@ -16,4 +16,6 @@ public interface EmployeeDao {
 
     void insertRecord(Employee employee);
 
+    void deleteAllData (String tableName);
+
 }

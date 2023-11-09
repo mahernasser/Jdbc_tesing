@@ -1,5 +1,6 @@
 package com.maher;
 
+import com.maher.dao.DBConnection;
 import com.maher.dao.Employee;
 import com.maher.dao.EmployeeDao;
 import com.maher.dao.EmployeeDaoImpl;
@@ -11,11 +12,9 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) {
         EmployeeDao employeeDao = new EmployeeDaoImpl();
-        Employee employee = new Employee(120,"Maher Nasser Maher", 27000,
+        Employee employee = new Employee(320, "Maher Nasser Maher", 27000,
                 true, new Date());
-        System.out.println(employeeDao.getById(3));
-
-    //   employeeDao.getAll().forEach(System.out::println);
+        employeeDao.insertRecord(employee);
     }
 
     // method to check if the connection on
