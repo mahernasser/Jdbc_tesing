@@ -11,9 +11,9 @@ public class DBConnection {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
     private static Connection connection;
-
     public static Connection getConnection() {
         try {
+
             connection = DriverManager.getConnection(String.format("jdbc:mysql://%s:%d/%s", HOST, PORT, DB_NAME), USERNAME, PASSWORD);
         } catch (SQLException e) {
             System.out.println(e.toString());
